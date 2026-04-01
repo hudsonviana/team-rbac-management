@@ -21,8 +21,13 @@ export function generateToken(userId: string): string {
   return jwt.sign({ userId }, JWT_SECRET, { expiresIn: '7d' });
 }
 
-export function verifyToken(token: string): { userId: string } {
-  return jwt.verify(token, JWT_SECRET) as { userId: string };
+export function verifyToken(token: string): { userId: string } | null {
+  try {
+    return jwt.verify(token, JWT_SECRET) as { userId: string };
+  } catch (error) {
+    console.error('Token inválido ou expirado:', error);
+    return null;
+  }
 }
 
 export async function getCurrentUser(): Promise<User | null> {
@@ -34,8 +39,11 @@ export async function getCurrentUser(): Promise<User | null> {
 
     const decode = verifyToken(token);
 
+    if (!decode) return null;
+
     const userFromDb = await prisma.user.findUnique({
       where: { id: decode.userId },
+      include: { team: true },
     });
 
     if (!userFromDb) return null;
