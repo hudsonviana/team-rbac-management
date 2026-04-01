@@ -25,3 +25,5 @@ export interface Team {
   createdAt: Date;
   updatedAt: Date;
 }
+
+// https://www.youtube.com/watch?v=b05ky3LdzKU
