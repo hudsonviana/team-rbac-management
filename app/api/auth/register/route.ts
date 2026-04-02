@@ -10,9 +10,7 @@ export async function POST(request: NextRequest) {
 
     if (!name || !email || !password) {
       return NextResponse.json(
-        {
-          error: 'Nome, email e password são obrigatórios',
-        },
+        { error: 'Nome, email e password são obrigatórios' },
         { status: 400 },
       );
     }
@@ -23,9 +21,7 @@ export async function POST(request: NextRequest) {
 
     if (existingUser) {
       return NextResponse.json(
-        {
-          error: 'Usuário com este email já existe',
-        },
+        { error: 'Usuário com este email já existe' },
         { status: 409 },
       );
     }
@@ -39,9 +35,7 @@ export async function POST(request: NextRequest) {
 
       if (!team) {
         return NextResponse.json(
-          {
-            error: 'Por favor, entre com um código de time válido',
-          },
+          { error: 'Por favor, entre com um código de time válido' },
           { status: 400 },
         );
       }
@@ -93,9 +87,7 @@ export async function POST(request: NextRequest) {
     console.error('Falha ao registrar Usuário:', error);
 
     return NextResponse.json(
-      {
-        error: 'Erro interno do servidor',
-      },
+      { error: 'Erro interno do servidor' },
       { status: 500 },
     );
   }

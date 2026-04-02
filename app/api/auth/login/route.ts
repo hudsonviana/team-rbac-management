@@ -9,9 +9,7 @@ export async function POST(request: NextRequest) {
 
     if (!email || !password) {
       return NextResponse.json(
-        {
-          error: 'Email e senha são obrigatórios',
-        },
+        { error: 'Email e senha são obrigatórios' },
         { status: 400 },
       );
     }
@@ -23,9 +21,7 @@ export async function POST(request: NextRequest) {
 
     if (!userFromDb) {
       return NextResponse.json(
-        {
-          error: 'Credenciais inválidas',
-        },
+        { error: 'Credenciais inválidas' },
         { status: 401 },
       );
     }
@@ -34,9 +30,7 @@ export async function POST(request: NextRequest) {
 
     if (!isValidPassword) {
       return NextResponse.json(
-        {
-          error: 'Credenciais inválidas',
-        },
+        { error: 'Credenciais inválidas' },
         { status: 401 },
       );
     }
@@ -67,9 +61,7 @@ export async function POST(request: NextRequest) {
     console.error('Falha ao fazer login:', error);
 
     return NextResponse.json(
-      {
-        error: 'Erro interno do servidor',
-      },
+      { error: 'Erro interno do servidor' },
       { status: 500 },
     );
   }
